@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <footer className='bg-main text-center text-base py-1 text-[white]'> &copy; BidZone, 2023</footer>
   )
 }
 

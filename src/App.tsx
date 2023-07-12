@@ -11,14 +11,14 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <Headers />
-      <div className="flex-1">
+      <main className="flex-1 w-[85%] 2xl:w-[1100px] mx-auto">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<HomePage />} />
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
-      </div>
+      </main>
       <Footer />
       <ToastContainer />
     </div>
