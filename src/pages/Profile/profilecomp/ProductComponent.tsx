@@ -38,7 +38,7 @@ const ProductComponent = () => {
           })}
         </div>
         {title[0].state && (
-          <div className="bg-[#D9D9D9] flex flex-col gap-2 py-3 mt-2 font-semibold text-lg">
+          <div className="shadow-lg flex flex-col gap-2 py-3 mt-2 font-semibold text-lg">
             <Fields
               label={"Product Name"}
               inputTypes={"text"}

@@ -9,13 +9,9 @@ const Profile = () => {
       <div>
         <ProfileComponent />
       </div>
-      <div className="col-span-2 p-12 shadow-2xl">
-        <div>
+      <div className="col-span-2 p-12 shadow-2xl flex flex-col gap-8">
           <ProductComponent />
-        </div>
-        <div>
           <BidComponent />
-        </div>
       </div>
     </div>
   );

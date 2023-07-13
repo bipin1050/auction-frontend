@@ -6,6 +6,8 @@ import ProductDetails from "./pages/ProductDetails";
 import Profile from "./pages/Profile";
 import Headers from "./components/Headers";
 import Footer from "./components/Footer";
+import { Login } from "./pages/Login";
+import { Signup } from "./pages/Signup";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="/products" element={<HomePage />} />
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </main>
       <Footer />
