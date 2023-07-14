@@ -7,23 +7,27 @@ import {
   Group,
   PaperProps,
   Button,
-  Divider,
-  Checkbox,
   Anchor,
   Stack,
 } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../authentication/auth";
 
 export function Login(props: PaperProps) {
-
   const navigate = useNavigate();
+  const { user, isLoading, login } = useContext(AuthContext);
+  useEffect(() => {
+    if (user) {
+      navigate("/profile");
+    }
+  }, [user, navigate]);
   const form = useForm({
     initialValues: {
       username: "",
       password: "",
     },
     validate: {
-      // username: (val) => (/^\S+@\S+$/.test(val) ? null : "Invalid email"),
       username: (val) =>
         val.length <= 6
           ? "Username should include at least 6 characters"
@@ -35,14 +39,22 @@ export function Login(props: PaperProps) {
     },
   });
 
-  const handleSubmit = () => {
+  const handleBlur = (field: string) => {
+    form.validateField(field);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     if (form.isValid()) {
-      console.log("Form submitted successfully");
-      // Additional logic for handling the form submission goes here
+      event.preventDefault();
+      console.log(form.values.username, form.values.password)
+      login(form.values.username, form.values.password);
     } else {
       console.log("Form validation failed");
     }
   };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Paper radius="md" p="xl" withBorder className="w-[400px] mx-auto">
@@ -52,7 +64,6 @@ export function Login(props: PaperProps) {
 
       <form onSubmit={handleSubmit}>
         <Stack>
-
           <TextInput
             required
             label="Username"
@@ -61,7 +72,8 @@ export function Login(props: PaperProps) {
             onChange={(event) =>
               form.setFieldValue("username", event.currentTarget.value)
             }
-            error={form.errors.username && "Username should include at least 6 characters"}
+            onBlur={() => handleBlur("username")} // Handle onBlur event
+            error={form.errors.username} // Use form.errors directly
             radius="md"
           />
 
@@ -73,10 +85,8 @@ export function Login(props: PaperProps) {
             onChange={(event) =>
               form.setFieldValue("password", event.currentTarget.value)
             }
-            error={
-              form.errors.password &&
-              "Password should include at least 6 characters"
-            }
+            onBlur={() => handleBlur("password")} // Handle onBlur event
+            error={form.errors.password} // Use form.errors directly
             radius="md"
           />
         </Stack>
@@ -86,7 +96,7 @@ export function Login(props: PaperProps) {
             component="button"
             type="button"
             color="dimmed"
-            onClick={() => navigate('/signup')}
+            onClick={() => navigate("/signup")}
             size="xs">
             {"Don't have an account? Register"}
           </Anchor>

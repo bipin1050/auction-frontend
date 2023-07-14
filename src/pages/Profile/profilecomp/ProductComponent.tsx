@@ -29,7 +29,7 @@ const ProductComponent = () => {
               <div
                 key={id}
                 onClick={() => handleTitleClick(title.path)}
-                className={`py-2 px-4 text-[white] cursor-pointer ${
+                className={`py-2 px-4 text-white cursor-pointer ${
                   title.state ? "bg-main" : "bg-ignore"
                 }`}>
                 {title.name}
@@ -42,7 +42,7 @@ const ProductComponent = () => {
             <Fields
               label={"Product Name"}
               inputTypes={"text"}
-              inputStyles={"rounded-md px-2"}
+              inputStyles={"rounded-md px-2 outline outline-1 outline-main"}
             />
             <Fields
               label={"Upload Image"}
@@ -57,7 +57,7 @@ const ProductComponent = () => {
             <Fields
               label={"Minimum Bid"}
               inputTypes={"number"}
-              inputStyles={"rounded-md px-2"}
+              inputStyles={"rounded-md px-2 outline outline-1 outline-main"}
             />
             <Fields
               label={"Enable Instant Buy"}
@@ -67,12 +67,12 @@ const ProductComponent = () => {
             <Fields
               label={"Instant Buy"}
               inputTypes={"number"}
-              inputStyles={"rounded-md px-2"}
+              inputStyles={"rounded-md px-2 outline outline-1 outline-main"}
             />
             <Fields
               label={"End Date"}
               inputTypes={"date"}
-              inputStyles={"rounded-md px-2"}
+              inputStyles={"rounded-md px-2 outline outline-1 outline-main"}
             />
           </div>
         )}

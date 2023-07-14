@@ -1,8 +1,18 @@
+import { useContext } from "react";
 import img from "../../assets/auction-icon.jpg";
-import Card from "../../components/Card";
 import Button from "../../components/UI/Button";
+import { AuthContext } from "../../authentication/auth";
+import { useNavigate } from "react-router-dom";
 
 const ProductDetails = () => {
+
+  const {user} = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleClick = (id : string) => {
+    if(!user) navigate('/login')
+    // id == 'placebid' ? :
+  }
   return (
     <div>
       <div className="grid grid-cols-2 gap-2 pt-8">
@@ -18,28 +28,19 @@ const ProductDetails = () => {
             Current Bid: $5 No. of bids: 4
             <Button
               value="Place Bid ($6)"
-              handleClick={() => console.log("first")}
+              handleClick={() => handleClick("placebid")}
               styles={"w-[200px] mr-auto ml-0"}
             />
             <Button
               value="Instant Buy ($50)"
-              handleClick={() => console.log("first")}
+              handleClick={() => handleClick("instantbuy")}
               styles={"w-[200px] mr-auto ml-0"}
             />
           </div>
           <div>Product Description: This is an awesome product</div>
         </div>
       </div>
-      <div>
-        <div>Recent Products</div>
-        <div className="grid grid-cols-5 gap-3">
-          <Card value={"Product title"} />
-          <Card value={"Product title"} />
-          <Card value={"Product title"} />
-          <Card value={"Product title"} />
-          <Card value={"Product title"} />
-        </div>
-      </div>
+      <div>bottom content</div>
     </div>
   );
 };

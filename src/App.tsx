@@ -8,9 +8,11 @@ import Headers from "./components/Headers";
 import Footer from "./components/Footer";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
+import { AuthProvider } from "./authentication/auth";
 
 function App() {
   return (
+    <AuthProvider>
     <div className="flex flex-col min-h-screen">
       <Headers />
       <main className="flex-1 w-[85%] 2xl:w-[1100px] mx-auto">
@@ -26,6 +28,7 @@ function App() {
       <Footer />
       <ToastContainer />
     </div>
+    </AuthProvider>
   );
 }
 

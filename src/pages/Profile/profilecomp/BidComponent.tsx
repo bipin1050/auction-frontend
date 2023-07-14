@@ -27,7 +27,7 @@ const BidComponent = () => {
               <div
                 key={id}
                 onClick={() => handleTitleClick(title.path)}
-                className={`py-2 px-4 text-[white] cursor-pointer ${
+                className={`py-2 px-4 text-white cursor-pointer ${
                   title.state ? "bg-main" : "bg-ignore"
                 }`}>
                 {title.name}
