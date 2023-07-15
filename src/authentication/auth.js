@@ -13,7 +13,6 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-
     if (!token) {
       // setUser("");
       setIsLoading(false);
@@ -36,7 +35,7 @@ const AuthProvider = ({ children }) => {
         setIsLoading(false);
         // navigate("/login");
       });
-  }, []);
+  }, [navigate]);
 
   const login =  (username, password) => {
     setIsLoading(true);

@@ -14,6 +14,9 @@ import {
 } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { upperFirst } from "@mantine/hooks";
+import { baseURL } from "../../data/baseURL";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export function Signup(props: PaperProps) {
   const navigate = useNavigate();
@@ -36,17 +39,32 @@ export function Signup(props: PaperProps) {
     },
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     if (form.isValid()) {
-      console.log("Form submitted successfully");
-      // Additional logic for handling the form submission goes here
+      event.preventDefault();
+      axios.post(baseURL + "/user/signup", {
+        name: form.values.name,
+        username: form.values.username,
+        password: form.values.password,
+      }).then((res)=>{
+        console.log("Form submitted successfully");
+        toast.success("User Created");
+        navigate("/login")
+      }).catch((err)=>{
+        console.log(err.message);
+        toast.error("Failed to create user")
+      });
     } else {
       console.log("Form validation failed");
     }
   };
 
   return (
-    <Paper radius="md" p="xl" withBorder className="w-[400px] mx-auto">
+    <Paper
+      radius="md"
+      p="xl"
+      withBorder
+      className="w-[400px] max-[500px]:w-[90%] mx-auto">
       <Text size="lg" weight={500} className="text-center py-2">
         Welcome to BidZone
       </Text>

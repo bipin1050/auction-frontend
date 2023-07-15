@@ -9,6 +9,10 @@ export type Product = {
   endDate: Date;
   status?: string;
   userid: string;
+  bidCount: number;
+  highestBid : number;
+  winner: string;
+  userBid: number;
 };
 
 export type FetchState<T> = {

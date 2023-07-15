@@ -4,8 +4,10 @@ import useFetch from "../../../../data/useFetch";
 import { Product } from "../../../../types/FetchTypes";
 import { baseURL } from "../../../../data/baseURL";
 
-const ActiveBids = () => {
-  const { data, isLoading, error } = useFetch("/product/getClosedBids");
+const ClosedBids = () => {
+  const { data, isLoading, error } = useFetch(
+    "/product/getClosedProductsBidded"
+  );
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -27,7 +29,8 @@ const ActiveBids = () => {
                   <div>{product.productName}</div>
                   <div>Total Bids : {product.bidCount}</div>
                   <div>Highest Bids : ${product.highestBid}</div>
-                  <div>Winner : {product.winner}</div>
+                  <div>Your Bid : ${product.userBid}</div>
+                  <div>Winner : ${product.winner}</div>
                   <div></div>
                 </div>
               </div>
@@ -41,4 +44,4 @@ const ActiveBids = () => {
   );
 };
 
-export default ActiveBids;
+export default ClosedBids;

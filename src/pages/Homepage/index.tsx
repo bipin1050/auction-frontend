@@ -13,13 +13,11 @@ const HomePage = () => {
     return <div>{error}</div>;
   }
   return (
-    <div className="py-2 grid gap-4 w-[80%] mx-auto sm:grid-cols-2 sm:w-full md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
-      {/* <Card value={"Product title is the onoy way to achiw we s slf sd and"} /> */}
-      {data && data.map((product, id)=>{
-        return (
-          <Card key={id} product = {product}/> 
-        )
-      })}
+    <div className="py-2 grid gap-4 w-full min-[450px]:w-[80%] mx-auto sm:grid-cols-2 sm:w-full md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
+      {data &&
+        data.map((product, id) => {
+          return <Card key={id} product={product} />;
+        })}
     </div>
   );
 }

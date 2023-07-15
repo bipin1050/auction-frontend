@@ -34,31 +34,27 @@ const ProfileComponent = () => {
   }
 
   return (
-    <div className="px-10 py-6 shadow-2xl">
-      <div className="flex justify-between items-center">
+    <div className="px-5 lg:px-10 py-6 shadow-2xl flex flex-col gap-4 items-center lg:items-start">
+      <div className="flex justify-between items-center flex-col lg:flex-row ">
         <img src={img} width={100} />
-        <div className="font-bold text-lg text-main leading-5 text-right">
-          <div>Bipin Khanal</div>
-          <div className="text-base">#bipin_1078</div>
+        <div className="font-bold text-lg text-main leading-5 text-center lg:text-right">
+          <div>{user.name}</div>
+          <div className="text-base">{user.username}</div>
         </div>
-      </div>
-      <div className="font-bold text-lg text-main py-3 leading-6">
-        Bid Placed : 10
-        <br />
-        Active Bid : 3
-        <br />
-        Closed Bid : 7
       </div>
       <div className="flex items-center">
         <span>Balance: ${user.balance}</span>
         <button
-          onClick={() => {setShowModal(true)}}
-          className="bg-main text-white h-6 px-1 rounded-md flex items-center justify-center ml-1">
+          onClick={() => {
+            setShowModal(true);
+          }}
+          className="bg-main border-2 border-main  text-white hover:bg-white hover:text-main h-6 px-1 rounded-md flex items-center justify-center ml-1">
           <span className="text-lg">+Add</span>
         </button>
       </div>
+      <div>Hold Balance: ${user.holdbalance}</div>
       <div>
-        <button onClick={()=>logout()}>Logout</button>
+        <Button value="Logout" handleClick={() => logout()} styles="px-5 ml-0" />
       </div>
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center">
@@ -77,18 +73,24 @@ const ProfileComponent = () => {
                 placeholder="Enter amount in $"
                 className="outline outline-1 text-main font-bold rounded-md px-2 w-full h-9"
                 value={amount}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{setAmount(e.target.value)}}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setAmount(e.target.value);
+                }}
               />
               <div className="flex">
                 <Button
                   value="Add"
                   styles="px-10 ml-0 mt-2 text-white rounded-md py-2"
-                  handleClick={() => {handleAddBalance()}}
+                  handleClick={() => {
+                    handleAddBalance();
+                  }}
                 />
                 <Button
                   value="Cancel"
                   styles="px-10 mr-0 mt-2 text-black rounded-md py-2"
-                  handleClick={() => {setShowModal(false)}}
+                  handleClick={() => {
+                    setShowModal(false);
+                  }}
                 />
               </div>
             </div>

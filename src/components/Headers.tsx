@@ -9,13 +9,14 @@ const Headers = () => {
     <header className="bg-main py-6">
       <nav className="w-[85%] 2xl:w-[1100px] mx-auto flex justify-between text-xl text-white">
         <div className="cursor-pointer" onClick={() => navigate("/")}>
-          BidZone - Auctions Made Easy
+          <span>BidZone</span>
+          <span className="max-[450px]:hidden">- Auctions Made Easy</span>
         </div>
         {user && (
           <button
             className="cursor-pointer"
             onClick={() => navigate("/profile")}>
-            Hi { user.name.split(" ")[0]}
+            Hi {user.name.split(" ")[0]}
           </button>
         )}
         {!user && (

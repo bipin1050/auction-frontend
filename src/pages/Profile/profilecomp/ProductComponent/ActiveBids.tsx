@@ -14,19 +14,22 @@ const ActiveBids = () => {
   }
   return (
     <div>
-      {data ? (
+      {data.length ? (
         data.map((product: Product, id: number) => {
           return (
             <div key={id}>
-              <div className="flex px-2 py-3 shadow-xl items-center">
-                <div>{id + 1}</div>
+              <div className="flex px-2 py-3 shadow-xl items-center max-[450px]:flex-col max-[450px]:gap-3">
+                <div className="max-[450px]:hidden">{id + 1}</div>
                 <div className="px-8">
                   <img src={`${baseURL}/images/${product.image}`} width={100} />
                 </div>
                 <div>
                   <div>{product.productName}</div>
-                  <div>Total Bids : 10</div>
-                  <div>Highest Bids : $68</div>
+                  <div>Total Bids : {product.bidCount}</div>
+                  <div>
+                    Highest Bids : $
+                    {product.highestBid === null ? "0" : product.highestBid}
+                  </div>
                   <div></div>
                 </div>
               </div>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import img from "../../../../assets/auction-icon.jpg";
+import ClosedBids from "./ClosedBids";
+import PendingBids from "./PendingBids";
 
 const BidComponent = () => {
   const [title, setTitle] = useState([
@@ -36,30 +38,10 @@ const BidComponent = () => {
           })}
         </div>
         {title[0].state && (
-          <div className="flex px-2 py-3 shadow-xl items-center">
-            <div>1</div>
-            <div className="px-8">
-              <img src={img} width={100} />
-            </div>
-            <div>
-              <div>Total Bids : 10</div>
-              <div>Highest Bids : $68</div>
-              <div></div>
-            </div>
-          </div>
+          <ClosedBids />
         )}
         {title[1].state && (
-          <div className="flex px-2 py-3 shadow-xl items-center">
-            <div>1</div>
-            <div className="px-8">
-              <img src={img} width={100} />
-            </div>
-            <div>
-              <div>Total Bids : 10</div>
-              <div>Highest Bids : $68</div>
-              <div></div>
-            </div>
-          </div>
+          <PendingBids />
         )}
       </div>
     </div>

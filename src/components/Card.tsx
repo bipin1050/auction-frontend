@@ -39,12 +39,12 @@ const Card = ({ product }: CardProps) => {
           </span>
         </div>
         <div className="">
-          <p>Minimum Bid : $5</p>
-          <p>Instant Buy : $50</p>
+          <p>Minimum Bid : ${product.minimumBid?product.minimumBid:"--"}</p>
+          <p>Instant Buy : ${product.instantBuy?product.instantBuy:"--"}</p>
         </div>
         <div className="flex justify-between text-base italic">
           <div>Ends on: 2023/10/12</div>
-          <div>5 bids</div>
+          <div>{product.bidCount} bids</div>
         </div>
         {/* <Button
           value={"Place bid (min $5)"}

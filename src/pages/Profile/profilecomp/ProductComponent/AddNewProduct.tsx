@@ -139,10 +139,10 @@ const AddNewProduct = () => {
   };
   return (
     <form
-      className="shadow-lg flex flex-col gap-2 py-3 mt-2 font-semibold text-lg"
+      className="shadow-lg flex flex-col gap-2 py-3 mt-2 font-semibold text-lg max-[950px]:gap-5"
       encType="multipart/form-data">
-      <div className="grid grid-cols-5 gap-3">
-        <div className="text-right col-span-2">
+      <div className="grid grid-cols-5 gap-3 max-[950px]:grid-cols-1 max-[950px]:px-4 max-[950px]:gap-1">
+        <div className="text-right col-span-2 max-[950px]:text-left">
           <label>Product Name:</label>
         </div>
         <div className="text-left col-span-3">
@@ -155,8 +155,8 @@ const AddNewProduct = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-3">
-        <div className="text-right col-span-2">
+      <div className="grid grid-cols-5 gap-3 max-[950px]:grid-cols-1 max-[950px]:px-4 max-[950px]:gap-1">
+        <div className="text-right col-span-2 max-[950px]:text-left">
           <label>Upload Image:</label>
         </div>
         <div className="text-left col-span-3">
@@ -168,8 +168,8 @@ const AddNewProduct = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-3">
-        <div className="text-right col-span-2">
+      <div className="grid grid-cols-5 gap-3 max-[950px]:flex max-[950px]:px-4 max-[950px]:gap-1">
+        <div className="text-right col-span-2 max-[950px]:text-left">
           <label>Enable Bid:</label>
         </div>
         <div className="text-left col-span-3">
@@ -182,8 +182,8 @@ const AddNewProduct = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-3">
-        <div className="text-right col-span-2">
+      <div className="grid grid-cols-5 gap-3 max-[950px]:grid-cols-1 max-[950px]:px-4 max-[950px]:gap-1">
+        <div className="text-right col-span-2 max-[950px]:text-left">
           <label>Minimum Bid:</label>
         </div>
         <div className="text-left col-span-3">
@@ -196,8 +196,8 @@ const AddNewProduct = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-3">
-        <div className="text-right col-span-2">
+      <div className="grid grid-cols-5 gap-3 max-[950px]:flex max-[950px]:px-4 max-[950px]:gap-1">
+        <div className="text-right col-span-2 max-[950px]:text-left">
           <label>Enable Instant Buy:</label>
         </div>
         <div className="text-left col-span-3">
@@ -210,8 +210,8 @@ const AddNewProduct = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-3">
-        <div className="text-right col-span-2">
+      <div className="grid grid-cols-5 gap-3 max-[950px]:grid-cols-1 max-[950px]:px-4 max-[950px]:gap-1">
+        <div className="text-right col-span-2 max-[950px]:text-left">
           <label>Instant Buy:</label>
         </div>
         <div className="text-left col-span-3">
@@ -224,8 +224,8 @@ const AddNewProduct = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-3">
-        <div className="text-right col-span-2">
+      <div className="grid grid-cols-5 gap-3 max-[950px]:grid-cols-1 max-[950px]:px-4 max-[950px]:gap-1">
+        <div className="text-right col-span-2 max-[950px]:text-left">
           <label>End Date:</label>
         </div>
         <div className="text-left col-span-3">
@@ -240,7 +240,7 @@ const AddNewProduct = () => {
       </div>
       <Button
         value="Submit"
-        styles="w-[200px] mr-auto ml-0"
+        styles="w-[200px] mr-auto ml-auto"
         handleClick={handleFormSubmit}
       />
     </form>

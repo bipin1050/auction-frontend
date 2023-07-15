@@ -44,8 +44,8 @@ export function Login(props: PaperProps) {
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (form.isValid()) {
-      event.preventDefault();
       console.log(form.values.username, form.values.password)
       login(form.values.username, form.values.password);
     } else {
@@ -57,7 +57,11 @@ export function Login(props: PaperProps) {
   }
 
   return (
-    <Paper radius="md" p="xl" withBorder className="w-[400px] mx-auto">
+    <Paper
+      radius="md"
+      p="xl"
+      withBorder
+      className="w-[400px] max-[500px]:w-[90%] mx-auto">
       <Text size="lg" weight={500} className="text-center py-2">
         Welcome to BidZone
       </Text>
