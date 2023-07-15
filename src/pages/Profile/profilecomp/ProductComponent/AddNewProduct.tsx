@@ -1,12 +1,12 @@
 import { useState } from "react";
-import Button from "../../../components/UI/Button";
+import Button from "../../../../components/UI/Button";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const AddNewProduct = () => {
   const [newProduct, setNewProduct] = useState({
     productName: "",
-    image: "",
+    image: null as File | null,
     enableBid: "",
     minimumBid: "",
     enableInstantBuy: "",
@@ -28,46 +28,114 @@ const AddNewProduct = () => {
       const file = e.target.files[0];
       setNewProduct((prevState) => ({
         ...prevState,
-        image: file.name,
+        image: file,
       }));
     }
+  };
+
+  const validForm = () => {
+    // Validate productName
+    if (!newProduct.productName) {
+      toast.error("Product Name is required");
+      return false;
+    }
+
+    // Validate image
+    if (!newProduct.image) {
+      toast.error("Image is required");
+      return false;
+    }
+
+    // Validate enableBid or enableInstantBuy
+    if (!newProduct.enableBid && !newProduct.enableInstantBuy) {
+      toast.error(
+        "Please select at least one option: Enable Bid or Enable Instant Buy"
+      );
+      return false;
+    }
+
+    // Validate minimumBid if enableBid is true
+    if (newProduct.enableBid && !newProduct.minimumBid) {
+      toast.error("Minimum Bid is required");
+      return false;
+    }
+
+    // Validate instantBuy if enableInstantBuy is true
+    if (newProduct.enableInstantBuy && !newProduct.instantBuy) {
+      toast.error("Instant Buy is required");
+      return false;
+    }
+
+    // Validate endDate
+    if (!newProduct.endDate) {
+      toast.error("End Date is required");
+      return false;
+    }
+    const currentDate = new Date();
+    const selectedDate = new Date(newProduct.endDate);
+    const isSameDay = (date1: Date, date2: Date) => {
+      return (
+        date1.getDate() === date2.getDate() &&
+        date1.getMonth() === date2.getMonth() &&
+        date1.getFullYear() === date2.getFullYear()
+      );
+    };
+
+    if (selectedDate < currentDate && !isSameDay(selectedDate, currentDate)) {
+      toast.error("End date cannot be in the past");
+      return false;
+    }
+
+    return true;
   };
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     console.log(newProduct);
-    const formData = new FormData();
-    formData.append("productName", newProduct.productName);
-    formData.append("image", newProduct.image);
-    formData.append("enableBid", newProduct.enableBid);
-    formData.append("minimumBid", newProduct.minimumBid);
-    formData.append("enableInstantBuy", newProduct.enableInstantBuy);
-    formData.append("instantBuy", newProduct.instantBuy);
-    formData.append("endDate", newProduct.endDate);
+    if (validForm()) {
+      const formData = new FormData();
+      formData.append("productName", newProduct.productName);
+      // formData.append("image", newProduct.image);
+      if (newProduct.image) {
+        formData.append("image", newProduct.image, newProduct.image.name);
+      }
+      formData.append("enableBid", newProduct.enableBid);
+      formData.append("minimumBid", newProduct.minimumBid);
+      formData.append("enableInstantBuy", newProduct.enableInstantBuy);
+      formData.append("instantBuy", newProduct.instantBuy);
+      formData.append("endDate", newProduct.endDate);
 
-    console.log(formData);
-    axios.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("accessToken")}`;
-    axios.defaults.headers.common["Content-Type"] = "application/json";
-    axios
-      .post("http://localhost:8000/product/createProduct", formData)
-      .then(() => {
-        // setNewProduct((newProduct) => ({
-        //   ...newProduct,
-        //   productName: "",
-        //   image: "",
-        //   enableBid: "",
-        //   minimumBid: "",
-        //   enableInstantBuy: "",
-        //   instantBuy: "",
-        //   endDate: ""
-        // }));
-        toast("Item added successfully");
-      })
-      .catch((err) => {
-        toast.error(err.response?.data?.message || err.message);
-      });
+      console.log(formData);
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${localStorage.getItem("accessToken")}`;
+      axios.defaults.headers.common["Content-Type"] = "application/json";
+      axios
+        .post("http://localhost:8000/product/createProduct", formData)
+        .then(() => {
+          setNewProduct((newProduct) => ({
+            ...newProduct,
+            productName: "",
+            image: null,
+            enableBid: "",
+            minimumBid: "",
+            enableInstantBuy: "",
+            instantBuy: "",
+            endDate: "",
+          }));
+          const checkboxElements = document.querySelectorAll<HTMLInputElement>(
+            'input[type="checkbox"]'
+          );
+          checkboxElements.forEach((checkbox) => {
+            checkbox.checked = false;
+          });
+          toast("Item added successfully");
+        })
+        .catch((err) => {
+          console.log(err.response.data.error);
+          toast.error(err.response.data.error);
+        });
+    }
   };
   return (
     <form
@@ -95,8 +163,7 @@ const AddNewProduct = () => {
           <input
             type="file"
             name="image"
-            accept="image/*"
-            className="w-2/3 "
+            className="rounded-md px-2 text-sm"
             onChange={handleImageChange}
           />
         </div>

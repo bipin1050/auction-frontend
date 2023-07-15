@@ -3,11 +3,36 @@ import { useContext, useState } from "react";
 import Button from "../../../components/UI/Button";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../authentication/auth";
+import axios from "axios";
+import { baseURL } from "../../../data/baseURL";
+import { toast } from "react-toastify";
 
 const ProfileComponent = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  const {logout} = useContext(AuthContext);
+  const {user, setUser, logout} = useContext(AuthContext);
+
+  const [amount, setAmount] = useState("0");
+  const handleAddBalance = () => {
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("accessToken")}`;
+    axios
+      .post(baseURL + "/user/addBalance", {
+        balance : amount
+      })
+      .then((res) => {
+        console.log(res)
+        setShowModal(false)
+        setUser({ ...user, balance: user.balance + Number(amount) });
+        toast.success("Balance Added Successfully")
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Failed to add Balance")
+      });
+  }
+
   return (
     <div className="px-10 py-6 shadow-2xl">
       <div className="flex justify-between items-center">
@@ -25,7 +50,7 @@ const ProfileComponent = () => {
         Closed Bid : 7
       </div>
       <div className="flex items-center">
-        <span>Balance: $20</span>
+        <span>Balance: ${user.balance}</span>
         <button
           onClick={() => {setShowModal(true)}}
           className="bg-main text-white h-6 px-1 rounded-md flex items-center justify-center ml-1">
@@ -51,14 +76,14 @@ const ProfileComponent = () => {
                 type="number"
                 placeholder="Enter amount in $"
                 className="outline outline-1 text-main font-bold rounded-md px-2 w-full h-9"
-                // value={amount}
-                // onChange={handleAmountChange}
+                value={amount}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{setAmount(e.target.value)}}
               />
               <div className="flex">
                 <Button
-                  value="Submit"
+                  value="Add"
                   styles="px-10 ml-0 mt-2 text-white rounded-md py-2"
-                  handleClick={() => console.log("hello")}
+                  handleClick={() => {handleAddBalance()}}
                 />
                 <Button
                   value="Cancel"

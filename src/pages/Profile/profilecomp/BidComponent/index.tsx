@@ -1,5 +1,5 @@
 import { useState } from "react";
-import img from "../../../assets/auction-icon.jpg";
+import img from "../../../../assets/auction-icon.jpg";
 
 const BidComponent = () => {
   const [title, setTitle] = useState([

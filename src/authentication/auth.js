@@ -38,9 +38,9 @@ const AuthProvider = ({ children }) => {
       });
   }, []);
 
-  const login = async (username, password) => {
+  const login =  (username, password) => {
     setIsLoading(true);
-    await axios
+   axios
       .post("http://localhost:8000/user/login", {
         username: username,
         password: password,
@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout }}>
+    <AuthContext.Provider value={{ user,setUser, isLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,18 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { baseURL } from "./baseURL";
+import { Product } from "../types/FetchTypes";
 
-const useFetch = ({path}) => {
-  const [data, setData] = useState([]);
+const useFetchDetails = (path: string, id: string) => {
+console.log(path, id)
+  const [data, setData] = useState<Product>();
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    axios.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("accessToken")}`;
     axios
-      .get(baseURL + path)
+      .get(`${baseURL + path}/${id}`)
       .then((res) => {
         console.log(res);
         setData(res.data);
@@ -24,8 +23,8 @@ const useFetch = ({path}) => {
         setError(err.message);
       });
   }, []);
-  
+
   return { data, isLoading, error };
 };
 
-export default useFetch;
+export default useFetchDetails;

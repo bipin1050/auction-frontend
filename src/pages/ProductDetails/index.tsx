@@ -2,17 +2,29 @@ import { useContext } from "react";
 import img from "../../assets/auction-icon.jpg";
 import Button from "../../components/UI/Button";
 import { AuthContext } from "../../authentication/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import useFetchDetails from "../../data/useFetchDetails";
 
 const ProductDetails = () => {
-
-  const {user} = useContext(AuthContext);
+  const { id } = useParams<{ id: string }>();
+  const { data, isLoading, error } = useFetchDetails(
+    "/product/productDetails",
+    id || ""
+  );
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleClick = (id : string) => {
-    if(!user) navigate('/login')
-    // id == 'placebid' ? :
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  const handleClick = (id: string) => {
+    if (!user) navigate("/login");
+    // id == 'placebid' ? :
+  };
   return (
     <div>
       <div className="grid grid-cols-2 gap-2 pt-8">
@@ -21,7 +33,7 @@ const ProductDetails = () => {
         </div>
         <div>
           <div className="font-bold text-2xl">
-            This is the Awesome Product Name
+            {data?.productName}
           </div>
           <div> Time Left: 2hrs 3min (2023/10/10)</div>
           <div className="bids">
@@ -40,7 +52,6 @@ const ProductDetails = () => {
           <div>Product Description: This is an awesome product</div>
         </div>
       </div>
-      <div>bottom content</div>
     </div>
   );
 };
