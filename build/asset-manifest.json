@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0e821758.css",
+    "main.js": "/static/js/main.35651f13.js",
+    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "static/media/auction-icon.jpg": "/static/media/auction-icon.5a07704f1f50f340e51b.jpg",
+    "static/media/error.jpg": "/static/media/error.c55c04bc068e924f4737.jpg",
+    "index.html": "/index.html",
+    "main.0e821758.css.map": "/static/css/main.0e821758.css.map",
+    "main.35651f13.js.map": "/static/js/main.35651f13.js.map",
+    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0e821758.css",
+    "static/js/main.35651f13.js"
+  ]
+}
