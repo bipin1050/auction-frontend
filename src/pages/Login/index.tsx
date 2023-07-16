@@ -46,7 +46,7 @@ export function Login(props: PaperProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (form.isValid()) {
-      console.log(form.values.username, form.values.password)
+      // console.log(form.values.username, form.values.password)
       login(form.values.username, form.values.password);
     } else {
       console.log("Form validation failed");

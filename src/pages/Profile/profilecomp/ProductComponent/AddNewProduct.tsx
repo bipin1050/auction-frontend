@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../../../../components/UI/Button";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { baseURL } from "../../../../data/baseURL";
 
 const AddNewProduct = () => {
   const [newProduct, setNewProduct] = useState({
@@ -111,7 +112,7 @@ const AddNewProduct = () => {
       ] = `Bearer ${localStorage.getItem("accessToken")}`;
       axios.defaults.headers.common["Content-Type"] = "application/json";
       axios
-        .post("http://localhost:8000/product/createProduct", formData)
+        .post(baseURL + "/product/createProduct", formData)
         .then(() => {
           setNewProduct((newProduct) => ({
             ...newProduct,

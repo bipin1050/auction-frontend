@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../data/useFetch";
+import { baseURL } from "../data/baseURL";
 
 const AuthContext = createContext();
 
@@ -18,11 +19,9 @@ const AuthProvider = ({ children }) => {
       setIsLoading(false);
       return;
     }
-    axios.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${token}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
-      .get("http://localhost:8000/user/loginWithToken")
+      .get(baseURL + "/user/loginWithToken")
       .then((res) => {
         console.log(res.data);
         setUser(res.data);
@@ -37,10 +36,10 @@ const AuthProvider = ({ children }) => {
       });
   }, [navigate]);
 
-  const login =  (username, password) => {
+  const login = (username, password) => {
     setIsLoading(true);
-   axios
-      .post("http://localhost:8000/user/login", {
+    axios
+      .post(baseURL + "/user/login", {
         username: username,
         password: password,
       })
@@ -65,7 +64,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user,setUser, isLoading, login, logout }}>
+    <AuthContext.Provider value={{ user, setUser, isLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
