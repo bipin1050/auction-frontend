@@ -10,6 +10,7 @@ import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import { AuthContext, AuthProvider } from "./authentication/auth";
 import { useContext } from "react";
+import { Error } from "./pages/Error";
 
 function App() {
   const { isLoading } = useContext(AuthContext);
@@ -26,6 +27,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/*" element={<Error />} />
             </Routes>
           </main>
           <Footer />
